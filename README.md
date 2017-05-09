@@ -5,7 +5,7 @@
 
 1.在classpath下放置conf.properties文件
 
-```
+```properties
  #配置服务的启动ip
 confserver.ip=127.0.0.1
  #配置服务的启动端口
@@ -25,26 +25,26 @@ redis.port=6379
 2.启动配置服务
 
 ```
-java com.code1024.oneconf.ConfServer
+$ java com.code1024.oneconf.ConfServer
 ```
 
 可以用工具访问检查下
 
 ```
-curl 127.0.0.1:8806/proj1
+$ curl 127.0.0.1:8806/proj1
 ```
 
 会返回具体分组的配置。
 
 3.在spring配置文件，修改以前的配置
 
-```
+```xml
 <context:property-placeholder location="classpath:conf.properties" />
 ```
 
 为：
 
-```
+```xml
 <bean id="confProperties" class="com.code1024.oneconf.ConfPropertiesFactoryBean"
 		p:location="/conf2.properties" />
 <context:property-placeholder properties-ref="confProperties" />
@@ -52,7 +52,7 @@ curl 127.0.0.1:8806/proj1
 
 其中conf2.properties的配置为：
 
-```
+```properties
 confserver.url=http://127.0.0.1:8806/proj1
 ```
 
